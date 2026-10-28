@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punnari</title>
+  <meta name="description" content="Painon ja kehon mittojen seuranta selkeillä graafeilla. Tiedot pysyvät puhelimessasi.">
+  <meta name="theme-color" content="#08170e">
+  <link rel="icon" href="punnari_icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #08170e;
+      --deep: #0d2616;
+      --surface: #10251a;
+      --surface-2: #173524;
+      --line: #224a32;
+      --text: #e6f4ea;
+      --muted: #95b5a0;
+      --green: #5fd47a;
+      --on-green: #062611;
+      --needle: #ffb300;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a { color: var(--green); }
+    a:focus-visible, .btn:focus-visible { outline: 3px solid var(--needle); outline-offset: 3px; }
+
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- Hero ---------- */
+    header {
+      background:
+        radial-gradient(700px 360px at 12% 0%, rgba(95, 212, 122, .15), transparent 70%),
+        linear-gradient(180deg, var(--deep) 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--line);
+      padding: 60px 0 56px;
+      overflow: hidden;
+    }
+
+    .hero { display: grid; gap: 44px; align-items: center; }
+
+    .app-icon {
+      width: 84px;
+      height: 84px;
+      border-radius: 21px;
+      display: block;
+      margin-bottom: 22px;
+      box-shadow: 0 0 0 1px var(--line), 0 12px 30px rgba(0, 0, 0, .45);
+    }
+
+    h1 {
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: clamp(56px, 13vw, 112px);
+      line-height: .95;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .lead { font-size: 20px; line-height: 1.5; margin: 18px 0 0; max-width: 32ch; }
+    .lead span { display: block; color: var(--muted); font-size: 17px; margin-top: 6px; }
+
+    .facts {
+      list-style: none;
+      margin: 26px 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .facts li {
+      border: 1px solid var(--line);
+      background: rgba(95, 212, 122, .08);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 15px;
+    }
+
+    .facts li::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-right: 8px;
+      vertical-align: 1px;
+    }
+
+    /* Mini progress card in the hero */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px 20px 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .45);
+      transform: rotate(1.5deg);
+      max-width: 440px;
+      width: 100%;
+      justify-self: center;
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .card-label { color: var(--muted); font-size: 15px; font-weight: 600; }
+
+    .card-value {
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 40px;
+      line-height: 1;
+    }
+
+    .card-change {
+      font-family: "Outfit", sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--green);
+    }
+
+    .card svg { display: block; width: 100%; height: auto; margin: 14px 0 10px; }
+
+    .goal { font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; }
+
+    .bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--surface-2);
+      margin-top: 6px;
+      overflow: hidden;
+    }
+
+    .bar i { display: block; height: 100%; width: 62%; background: var(--green); border-radius: 4px; }
+
+    /* ---------- Start ---------- */
+    .start {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      padding: 38px 0;
+    }
+
+    .start-inner { display: grid; gap: 20px; align-items: center; }
+
+    h2 {
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 36px;
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    .steps { display: grid; gap: 12px; }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      text-decoration: none;
+      border: 2px solid var(--green);
+    }
+
+    .btn .n {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      flex: none;
+    }
+
+    .btn-secondary { background: transparent; color: var(--green); }
+    .btn-secondary .n { background: var(--surface-2); color: var(--green); }
+    .btn-secondary:hover { background: var(--surface-2); }
+
+    .btn-primary { background: var(--green); color: var(--on-green); }
+    .btn-primary .n { background: var(--on-green); color: var(--green); }
+    .btn-primary:hover { background: #82e098; border-color: #82e098; }
+
+    .note { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+
+    /* ---------- Features ---------- */
+    main.wrap { padding-top: 56px; padding-bottom: 24px; }
+
+    .langs { display: grid; gap: 48px; }
+
+    .lang h2 { margin-bottom: 14px; color: var(--green); }
+
+    .lang > p { margin: 0 0 22px; max-width: 62ch; }
+
+    .features {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .features li {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--green);
+      border-radius: 10px;
+      padding: 13px 15px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .features strong { display: block; color: var(--text); font-size: 17px; margin-bottom: 2px; }
+
+    footer.wrap {
+      padding-top: 32px; padding-bottom: 48px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    @media (min-width: 840px) {
+      .hero { grid-template-columns: 1.1fr 1fr; }
+      .card { justify-self: end; }
+      .start-inner { grid-template-columns: 1fr 1.4fr; }
+      .langs { grid-template-columns: 1fr 1fr; gap: 56px; }
+      .features { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      header { padding: 44px 0 40px; }
+      .card { transform: none; padding: 16px 14px 12px; }
+      .card-value { font-size: 34px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap hero">
+    <div>
+      <img class="app-icon" src="punnari_icon.png" alt="Punnari app icon" width="84" height="84">
+      <h1>Punnari</h1>
+      <p class="lead">
+        Painon ja kehon mittojen seuranta selkeillä graafeilla.
+        <span lang="en">Track your weight and body measurements in clear charts.</span>
+      </p>
+      <ul class="facts">
+        <li>Tiedot pysyvät puhelimessasi</li>
+        <li>Ei mainoksia</li>
+        <li>Health Connect</li>
+        <li>Suomi &amp; English</li>
+      </ul>
+    </div>
+
+    <!-- Esimerkkinäkymä: paino laskee kohti tavoitetta -->
+    <div class="card" aria-hidden="true">
+      <div class="card-head">
+        <div>
+          <div class="card-label">Paino</div>
+          <div class="card-value">84,6 kg</div>
+        </div>
+        <div class="card-change">−7,4 kg</div>
+      </div>
+      <svg viewBox="0 0 400 150" role="presentation">
+        <!-- tavoiteviiva -->
+        <line x1="0" y1="128" x2="400" y2="128" stroke="#5fd47a" stroke-opacity=".5" stroke-width="2" stroke-dasharray="6 6"/>
+        <line x1="0" y1="40" x2="400" y2="40" stroke="#224a32" stroke-width="1"/>
+        <line x1="0" y1="84" x2="400" y2="84" stroke="#224a32" stroke-width="1"/>
+        <path d="M8 18 C40 22 60 30 92 34 S150 48 180 56 S240 62 270 74 S330 86 392 98 L392 150 L8 150 Z"
+              fill="#5fd47a" fill-opacity=".12"/>
+        <path d="M8 18 C40 22 60 30 92 34 S150 48 180 56 S240 62 270 74 S330 86 392 98"
+              fill="none" stroke="#5fd47a" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="8" cy="18" r="5" fill="#5fd47a"/>
+        <circle cx="92" cy="34" r="5" fill="#5fd47a"/>
+        <circle cx="180" cy="56" r="5" fill="#5fd47a"/>
+        <circle cx="270" cy="74" r="5" fill="#5fd47a"/>
+        <circle cx="392" cy="98" r="6" fill="#ffb300"/>
+      </svg>
+      <div class="goal"><span>4,6 kg tavoitteeseen (80,0 kg)</span><span>62 %</span></div>
+      <div class="bar"><i></i></div>
+    </div>
+  </div>
+</header>
+
+<section class="start">
+  <div class="wrap start-inner">
+    <h2>Aloita käyttö</h2>
+    <div class="steps">
+      <a class="btn btn-secondary" href="https://groups.google.com/g/punnari-closed-beta" target="_blank" rel="noopener">
+        <span class="n">1</span> Liity beta-testaajaksi
+      </a>
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=fi.punnari.app" target="_blank" rel="noopener">
+        <span class="n">2</span> Lataa Play Storesta
+      </a>
+      <p class="note">
+        Huom: Sovellus näkyy ladattavana vasta beta-jäsenyyden hyväksynnän jälkeen.<br>
+        Saatavilla vain Android-laitteilla.
+      </p>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="langs">
+
+    <section class="lang">
+      <h2>Suomeksi</h2>
+      <p>Punnari on selkeä ja mainokseton sovellus painon ja kehon mittojen seurantaan. Näet heti, paljonko olet muuttunut seurannan alusta, ja graafi näyttää kehityksen viikoittain tai kirjaus kerrallaan. Kaikki tiedot tallennetaan vain puhelimeesi: ei käyttäjätiliä, ei mainoksia, ei tiedonkeruuta. Sovellus toimii suomeksi ja englanniksi.</p>
+      <ul class="features">
+        <li><strong>Paino ja mitat</strong>Paino, vyötärö, lantio, rinta, reisi, käsivarsi, kaula ja rasvaprosentti.</li>
+        <li><strong>Muutos ja tavoite</strong>Muutos seurannan alusta ja edistyminen kohti tavoitepainoa.</li>
+        <li><strong>Graafi kahdella akselilla</strong>Vertaa esimerkiksi painoa ja vyötäröä samassa kuvassa.</li>
+        <li><strong>Viikkokeskiarvot</strong>Tasoittavat päivittäiset heilahtelut.</li>
+        <li><strong>Health Connect</strong>Punnitukset älyvaa'alta ja omat kirjaukset muihin sovelluksiin.</li>
+        <li><strong>Jaa edistyminen</strong>Valmis kuva esimerkiksi Instagramiin.</li>
+        <li><strong>BMI</strong>Näkyy painon vieressä, kun annat pituutesi.</li>
+        <li><strong>Varmuuskopio</strong>CSV-tiedosto, joka aukeaa myös Excelillä.</li>
+      </ul>
+    </section>
+
+    <section class="lang" lang="en">
+      <h2>In English</h2>
+      <p>Punnari is a clean, ad-free app for tracking your weight and body measurements. See at a glance how much you have changed since you started, and follow your progress in a chart by entry or by weekly average. All data is stored only on your phone: no account, no ads, no data collection. The app is available in Finnish and English.</p>
+      <ul class="features">
+        <li><strong>Weight and measurements</strong>Weight, waist, hips, chest, thigh, arm, neck and body fat.</li>
+        <li><strong>Change and goal</strong>Your change since the start and progress toward a goal weight.</li>
+        <li><strong>Dual-axis chart</strong>Compare, for example, weight and waist in one view.</li>
+        <li><strong>Weekly averages</strong>Smooth out day-to-day swings.</li>
+        <li><strong>Health Connect</strong>Weigh-ins from your smart scale, your entries to other apps.</li>
+        <li><strong>Share your progress</strong>A ready-made image, for example for Instagram.</li>
+        <li><strong>BMI</strong>Shown next to your weight once you enter your height.</li>
+        <li><strong>Backup</strong>A CSV file that also opens in Excel.</li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+<footer class="wrap">
+  © 2026 Jari-Matti Honkanen •
+  <a href="PrivacyPolicy.html">Privacy Policy</a> •
+  Contact: <a href="mailto:honkanen_dev@proton.me">honkanen_dev@proton.me</a>
+</footer>
+
+</body>
+</html>
